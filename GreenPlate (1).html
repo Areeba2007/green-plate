@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GreenPlate – Eat Fresh. Live Well.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--g1:#2E7D32;--g2:#66BB6A;--g3:#A5D6A7;--y:#F9A825;--bg:#F6FBF4;--tx:#1B2E1F;--card:#fff;--mut:#4d6652;--line:#dcebd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a12;--tx:#e8f3ea;--card:#172319;--mut:#a9c3ae;--line:#26392a;--g1:#4caf50}}
+:root[data-theme="dark"]{--bg:#0f1a12;--tx:#e8f3ea;--card:#172319;--mut:#a9c3ae;--line:#26392a;--g1:#4caf50}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Inter","Open Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Poppins","Montserrat",system-ui,sans-serif;line-height:1.2;margin:0 0 .5em}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:.6rem 1.25rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem}
+.tools{display:flex;gap:.5rem;justify-self:end}
+.brand{display:flex;align-items:center;gap:.5rem;font:700 1.3rem "Poppins",sans-serif;color:var(--g1)}
+nav{display:flex;gap:.25rem;justify-content:center}
+nav a{padding:.4rem .8rem;border-radius:99px;white-space:nowrap;color:var(--mut)}
+nav a.on,nav a:hover{background:var(--g1);color:#fff}
+button,.btn{font:inherit;cursor:pointer;border:0;border-radius:99px;padding:.6rem 1.2rem;background:var(--g1);color:#fff;font-weight:600}
+button.y,.btn.y{background:var(--y);color:#2b2100}
+button.o{background:transparent;color:var(--tx);border:1px solid var(--line)}
+:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+main{max-width:1080px;margin:auto;padding:1rem}
+.page{display:none}.page.on{display:block}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:2rem 0}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);color:var(--g1)}
+.hero p{color:var(--mut);max-width:46ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem}
+.grid.w{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+.act{text-align:center;transition:transform .2s}.act:hover{transform:translateY(-4px)}
+.ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;margin:0 auto .5rem}
+.stats{display:flex;gap:2rem;flex-wrap:wrap;margin:1.5rem 0}
+.stats b{display:block;font:700 1.8rem "Poppins",sans-serif;color:var(--g1)}
+.tag{display:inline-block;font-size:.8rem;padding:.1rem .6rem;border-radius:99px;background:var(--g3);color:#14401a;margin-right:.3rem}
+.rimgx{height:110px;border-radius:12px;display:grid;place-items:center;font-size:3.4rem;margin-bottom:.6rem}
+input,select,textarea{font:inherit;width:100%;padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--tx);margin:.25rem 0 .7rem}
+label{font-weight:600;font-size:.9rem}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.7rem 0}
+.res{font:600 1.1rem "Poppins",sans-serif;color:var(--g1);min-height:1.5em}
+.glass{font-size:1.6rem;background:none;padding:.2rem;border-radius:8px}
+.rec{background:#c62828}
+.note{font-size:.85rem;color:var(--mut)}
+footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line);margin-top:2rem;font-size:.9rem}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.hero-img,.photo{display:block;width:100%;object-fit:cover;background:var(--g3);color:var(--mut)}
+.hero-img{aspect-ratio:4/3;border-radius:24px}
+.photo{height:170px;border-radius:12px;margin-bottom:.6rem}.photo.wide{height:260px;border-radius:16px}
+.ic{color:var(--g1)}
+.glass i{color:var(--line)}.glass i.full{color:#1e88e5}
+
+/* navigation */
+#menu-btn{display:none}
+#top{position:fixed;right:16px;bottom:16px;width:46px;height:46px;padding:0;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .2s}
+#top.show{opacity:1;pointer-events:auto}
+@media(max-width:900px){
+ header{grid-template-columns:1fr auto}
+ #menu-btn{display:inline-block}
+ header{position:sticky}
+ nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:center;background:var(--card);padding:.5rem 1rem 1rem;border-bottom:1px solid var(--line);overflow:visible}
+ nav.open{display:flex}
+}
+
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="#home" aria-label="GreenPlate home">
+<svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#2E7D32"/><circle cx="32" cy="32" r="21" fill="#F6FBF4"/><circle cx="32" cy="32" r="15" fill="none" stroke="#A5D6A7" stroke-width="2"/><path d="M20 40C20 24 32 16 46 16c0 14-8 26-24 26z" fill="#66BB6A"/><path d="M22 40C28 32 34 26 42 20" stroke="#14401a" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M14 46h10M19 46v6" stroke="#F9A825" stroke-width="3" stroke-linecap="round"/></svg>
+GreenPlate</a>
+<nav id="nav" aria-label="Main">
+<a href="#about">About</a><a href="#home">Home</a><a href="#nutrition">Nutrition</a><a href="#recipes">Recipes</a><a href="#tools">Health tools</a><a href="#plans">Diet plans</a>
+</nav>
+<div class="tools"><button class="o" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><i class="fa-solid fa-bars"></i></button>
+<button class="o" id="theme" aria-label="Toggle dark mode"><i class="fa-solid fa-circle-half-stroke"></i></button></div>
+</header>
+<main>
+
+<section class="page" id="home">
+<div class="hero">
+<div>
+<h1>Eat fresh. Live well.</h1>
+<p>Simple recipes, honest nutrition facts and daily health tools, all in one place. Start with what’s on your plate.</p>
+<div class="row"><a class="btn" href="#recipes">Browse recipes</a><a class="btn y" href="#tools">Check my BMI</a></div>
+<div class="stats"><div><b data-n="10000">0</b>healthy recipes</div><div><b data-n="250">0</b>expert nutritionists</div><div><b data-n="48">0</b>wellness programs</div></div>
+</div>
+<img class="hero-img" src="images/hero.jpg" alt="Fresh vegetables and healthy dishes on a table">
+</div>
+<h2>Activities for every day</h2>
+<div class="grid" id="acts"></div>
+<h2 style="margin-top:2rem">Success stories</h2>
+<div class="grid w">
+<div class="card">“The weekly planner cut my grocery bill and my stress.”<p class="note">Ayesha, Faisalabad</p></div>
+<div class="card">“I finally understand macros. The calculators are clear and quick.”<p class="note">Bilal, Lahore</p></div>
+<div class="card">“Voice notes let me ask the nutritionist while cooking.”<p class="note">Sana, Karachi</p></div>
+</div>
+<div class="card" style="margin-top:2rem"><h3>Get weekly healthy tips</h3><div class="row"><input id="mail" type="email" placeholder="you@example.com" aria-label="Email" style="flex:1;margin:0"><button id="sub">Subscribe</button></div><div class="note" id="subm"></div></div>
+</section>
+
+<section class="page" id="nutrition">
+<h2>Nutrition guide</h2>
+<div class="grid w" id="nut"></div>
+<h3 style="margin-top:1.5rem">Search foods</h3>
+<div class="row"><input id="fq" placeholder="Try: banana, lentils, almonds…" aria-label="Search foods" style="flex:1;margin:0"><button class="y" id="fmic" aria-label="Voice search"><i class="fa-solid fa-microphone"></i></button></div>
+<div class="grid w" id="fres"></div>
+</section>
+
+<section class="page" id="recipes">
+<h2>Recipes</h2>
+<div class="row" id="filters"></div>
+<div class="grid w" id="rlist"></div>
+</section>
+
+<section class="page" id="tools">
+<h2>Health tools</h2>
+<div class="grid w">
+<div class="card"><h3>BMI calculator</h3><label>Weight (kg)<input id="bw" type="number" min="20" max="300"></label><label>Height (cm)<input id="bh" type="number" min="100" max="250"></label><button id="bgo">Calculate</button><div class="res" id="bres"></div></div>
+<div class="card"><h3>Daily calories</h3><label>Age<input id="ca" type="number"></label><label>Sex<select id="cs"><option value="m">Male</option><option value="f">Female</option></select></label><label>Weight (kg)<input id="cw" type="number"></label><label>Height (cm)<input id="ch" type="number"></label><label>Activity<select id="cl"><option value="1.2">Light</option><option value="1.55">Moderate</option><option value="1.75">Active</option></select></label><button id="cgo">Calculate</button><div class="res" id="cres"></div></div>
+<div class="card"><h3>Water tracker</h3><p class="note">Tap a glass for each 250 ml you drink. Goal: 8 glasses.</p><div id="gl"></div><div class="res" id="wres"></div><button class="o" id="wr">Reset</button></div>
+</div>
+<p class="note">These tools are educational and don’t replace advice from a doctor or registered dietitian.</p>
+</section>
+
+<section class="page" id="plans">
+<h2>Diet plans</h2>
+<div class="grid w">
+<div class="card"><img class="photo" loading="lazy" src="images/plan-loss.jpg" alt="Healthy salad bowl for weight loss"><h3>Weight loss</h3><p>Calorie-aware meals built on vegetables, lean protein and fibre.</p></div>
+<div class="card"><img class="photo" loading="lazy" src="images/plan-muscle.jpg" alt="Lifting weights at the gym"><h3>Muscle gain</h3><p>High-protein menus with smart snacks around your workouts.</p></div>
+<div class="card"><img class="photo" loading="lazy" src="images/plan-balanced.jpg" alt="Balanced meal on a plate"><h3>Balanced living</h3><p>Everyday plates that cover all food groups without counting.</p></div>
+<div class="card"><img class="photo" loading="lazy" src="images/plan-special.jpg" alt="Doctor talking with a patient"><h3>Special needs</h3><p>Diabetic-friendly and low-sodium options. Confirm with your doctor first.</p></div>
+</div>
+</section>
+
+<section class="page" id="about">
+<h2>About GreenPlate</h2>
+<img class="photo wide" src="images/about.jpg" alt="Nutritionist advising a client"><div class="card" style="margin-top:1rem"><p>GreenPlate helps people eat better with practical, science-based guidance. Our mission is to make healthy food simple, affordable and enjoyable.</p>
+<h3>Contact</h3><p>hello@greenplate.example</p>
+<h3>Health disclaimer</h3><p class="note">Content on this site is for education only. Talk to a qualified professional before changing your diet.</p></div>
+</section>
+
+</main>
+<footer>© 2026 GreenPlate · Eat Fresh. Live Well.</footer>
+
+<script>
+/* ===== NAVIGATION ===== */
+// GreenPlate navigation: page router, active link, mobile menu, back-to-top.
+// Load this BEFORE script.js:  <script src="navigation.js"></script>
+(function () {
+  const nav = document.getElementById('nav');
+  const btn = document.getElementById('menu-btn');
+  const pages = [...document.querySelectorAll('.page')];
+  const links = [...document.querySelectorAll('#nav a')];
+
+  // 1. Show the page named in the URL hash (#recipes, #tools ...); unknown hashes fall back to Home
+  function route() {
+    const id = location.hash.slice(1) || 'home';
+    const page = pages.find(p => p.id === id) || pages[0];
+    pages.forEach(p => p.classList.toggle('on', p === page));
+    links.forEach(a => {
+      const active = a.getAttribute('href') === '#' + page.id;
+      a.classList.toggle('on', active);
+      active ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+    });
+    document.title = (page.querySelector('h1, h2')?.textContent || 'Home') + ' | GreenPlate';
+    closeMenu();
+    scrollTo({ top: 0, behavior: 'smooth' });
+    page.setAttribute('tabindex', '-1');       // moves keyboard focus to the new page
+    page.focus({ preventScroll: true });
+  }
+
+  // 2. Mobile hamburger menu
+  function openMenu()  { nav.classList.add('open');    btn?.setAttribute('aria-expanded', 'true'); }
+  function closeMenu() { nav.classList.remove('open'); btn?.setAttribute('aria-expanded', 'false'); }
+  btn?.addEventListener('click', e => { e.stopPropagation(); nav.classList.contains('open') ? closeMenu() : openMenu(); });
+  document.addEventListener('click', e => { if (!nav.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  // 3. Back-to-top button
+  const top = document.createElement('button');
+  top.id = 'top';
+  top.setAttribute('aria-label', 'Back to top');
+  top.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+  top.onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
+  document.body.appendChild(top);
+  addEventListener('scroll', () => top.classList.toggle('show', scrollY > 400), { passive: true });
+
+  addEventListener('hashchange', route);
+  route();
+})();
+
+/* ===== MAIN FEATURES ===== */
+const $=s=>document.querySelector(s);
+const post=(u,d)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)}).then(r=>r.json());
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+/* theme */
+$("#theme").onclick=()=>{const r=document.documentElement;const d=getComputedStyle(r).getPropertyValue("--bg").trim()==="#0f1a12";r.dataset.theme=d?"light":"dark"};
+/* activities */
+const acts=[["carrot","Healthy eating","#e8f5e9"],["calendar-days","Meal planning","#fff8e1"],["fire","Calorie tracking","#ffebee"],["droplet","Water intake","#e3f2fd"],["spa","Yoga","#f3e5f5"],["person-walking","Walking","#e0f2f1"],["person-running","Running","#fff3e0"],["dumbbell","Gym workout","#eceff1"],["person-biking","Cycling","#e8eaf6"],["moon","Sleep","#ede7f6"],["capsules","Vitamins","#fffde7"],["kitchen-set","Cooking","#fbe9e7"],["cart-shopping","Grocery list","#f1f8e9"],["apple-whole","Fruits & veg","#fce4ec"],["weight-scale","Weight goals","#e0f7fa"],["user-doctor","Doctor chat","#e1f5fe"]];
+$("#acts").innerHTML=acts.map(a=>`<a class="card act" href="#tools"><div class="ic" style="background:${a[2]}"><i class="fa-solid fa-${a[0]}"></i></div><b>${a[1]}</b></a>`).join("");
+/* counters */
+document.querySelectorAll("[data-n]").forEach(el=>{const t=+el.dataset.n;let c=0;const s=Math.ceil(t/60);const i=setInterval(()=>{c=Math.min(t,c+s);el.textContent=c.toLocaleString()+"+";if(c>=t)clearInterval(i)},25)});
+/* nutrition */
+const nut=[["bread-slice","Carbohydrates","Your main energy source. Choose whole grains, fruit and legumes."],["drumstick-bite","Protein","Builds and repairs muscle. Eggs, pulses, fish, dairy and nuts."],["bottle-droplet","Healthy fats","Support the brain and heart. Olive oil, nuts, seeds, avocado."],["lemon","Vitamins","Small amounts, big roles. Eat a rainbow of fruit and vegetables."],["gem","Minerals","Iron, calcium, potassium and more. Keep salt in check."],["wheat-awn","Fibre","Keeps digestion steady and you full for longer."]];
+$("#nut").innerHTML=nut.map(n=>`<div class="card"><div class="ic" style="background:var(--g3)"><i class="fa-solid fa-${n[0]}"></i></div><h3>${n[1]}</h3><p>${n[2]}</p></div>`).join("");
+const foods=[["Banana",89,"1.1 g protein, rich in potassium"],["Lentils (cooked)",116,"9 g protein, 8 g fibre"],["Almonds",579,"21 g protein, healthy fats"],["Spinach",23,"Iron, folate, vitamin K"],["Apple",52,"2.4 g fibre, vitamin C"],["Brown rice (cooked)",112,"Whole grain carbohydrate"],["Egg",143,"13 g protein, vitamin B12"],["Yogurt (plain)",61,"Calcium and probiotics"],["Chickpeas (cooked)",164,"9 g protein, 8 g fibre"],["Carrot",41,"Beta-carotene for vision"]];
+async function showFoods(){const q=$("#fq").value.toLowerCase();let r;
+try{const x=await fetch("/api/foods?search="+encodeURIComponent(q));if(!x.ok)throw 0;r=await x.json()}
+catch(e){r=foods.filter(f=>f[0].toLowerCase().includes(q)).map(f=>({name:f[0],kcal:f[1],note:f[2]}))}
+$("#fres").innerHTML=r.length?r.map(f=>`<div class="card"><b>${f.name}</b><div class="note">${f.kcal} kcal per 100 g<br>${f.note}</div></div>`).join(""):`<p class="note">No match. Try another food name.</p>`}
+$("#fq").oninput=showFoods;showFoods();
+$("#fmic").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert("Voice search isn’t supported in this browser. Type your search instead.");return}const r=new SR();r.onresult=e=>{$("#fq").value=e.results[0][0].transcript.replace(/\.$/,"");showFoods()};r.onerror=()=>alert("Microphone access was blocked. Allow it in your browser settings.");r.start()};
+/* recipes */
+const recipes=[["Mint cucumber quinoa bowl","quinoa","vegan",380,15],["Smoothie bowl with berries","smoothie","vegan",290,10],["Grilled chicken and veg tray","chicken","high-protein",450,35],["Lentil and spinach daal","daal","vegan",340,30],["Avocado egg toast","avocado","keto",320,10],["Zucchini noodles with pesto","zucchini","keto",300,20],["Baked salmon with greens","salmon","high-protein",420,25],["Oat and apple porridge","porridge","diabetic-friendly",260,12]];
+let flt="all",fav=store.get("fav",[]);
+const dets=["all","vegan","keto","high-protein","diabetic-friendly","saved"];
+function showR(){$("#filters").innerHTML=dets.map(d=>`<button class="${d===flt?"":"o"}" data-f="${d}">${d==="all"?"All":d==="saved"?"Saved ♥":d}</button>`).join("");
+const l=recipes.filter(r=>flt==="all"||(flt==="saved"?fav.includes(r[0]):r[2]===flt));
+$("#rlist").innerHTML=l.length?l.map(r=>`<div class="card"><img class="photo" loading="lazy" src="images/recipe-${r[1]}.jpg" alt="${r[0]}"><h3>${r[0]}</h3><span class="tag">${r[2]}</span><span class="tag">${r[3]} kcal</span><span class="tag">${r[4]} min</span><div class="row"><button class="o" data-s="${r[0]}">${fav.includes(r[0])?"♥ Saved":"♡ Save"}</button><button class="o" data-l="${r[0]}"><i class="fa-solid fa-volume-high"></i> Listen</button></div></div>`).join(""):`<p class="note">Nothing saved yet. Tap Save on any recipe.</p>`;
+document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{flt=b.dataset.f;showR()});
+document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const n=b.dataset.s;fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];store.set("fav",fav);showR()});
+document.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{const r=recipes.find(x=>x[0]===b.dataset.l);if(!window.speechSynthesis)return;speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(`${r[0]}. ${r[3]} calories, ready in ${r[4]} minutes.`))})}
+showR();
+/* tools */
+$("#bgo").onclick=()=>{const w=+$("#bw").value,h=+$("#bh").value/100;if(!w||!h){$("#bres").textContent="Enter your weight and height.";return}const b=w/(h*h);const c=b<18.5?"Underweight":b<25?"Healthy range":b<30?"Overweight":"Obese";$("#bres").textContent=`BMI ${b.toFixed(1)} · ${c}`;post("/api/bmi",{weight:w,height:h*100,bmi:+b.toFixed(1),category:c}).catch(()=>{})};
+$("#cgo").onclick=()=>{const a=+$("#ca").value,w=+$("#cw").value,h=+$("#ch").value;if(!a||!w||!h){$("#cres").textContent="Fill in every field.";return}const bmr=10*w+6.25*h-5*a+($("#cs").value==="m"?5:-161);const t=Math.round(bmr*$("#cl").value);$("#cres").innerHTML=`${t} kcal/day<br><span class="note">Protein ≈ ${Math.round(w*1.6)} g · Fat ≈ ${Math.round(t*.28/9)} g · Carbs ≈ ${Math.round(t*.5/4)} g</span>`};
+let water=store.get("water",0);
+function showW(){$("#gl").innerHTML=Array.from({length:8},(_,i)=>`<button class="glass" aria-label="Glass ${i+1}" data-g="${i+1}"><i class="fa-solid fa-droplet ${i<water?"full":""}"></i></button>`).join("");$("#wres").textContent=`${water*250} ml of 2000 ml`;document.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{water=+b.dataset.g;store.set("water",water);showW()})}
+$("#wr").onclick=()=>{water=0;store.set("water",0);showW()};showW();
+/* newsletter */
+$("#sub").onclick=async()=>{const e=$("#mail").value;if(!/^\S+@\S+\.\S+$/.test(e)){$("#subm").textContent="Enter a valid email address.";return}
+try{await post("/api/newsletter",{email:e});$("#subm").textContent="You’re subscribed. Check your inbox for a welcome email."}catch(x){store.set("subs",[...store.get("subs",[]),e]);$("#subm").textContent="You’re subscribed (saved on this device)."}};
+</script>
+</body>
+</html>

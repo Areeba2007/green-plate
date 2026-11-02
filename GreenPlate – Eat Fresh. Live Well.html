@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GreenPlate – Eat Fresh. Live Well.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g1:#2E7D32;--g2:#66BB6A;--g3:#A5D6A7;--y:#F9A825;--bg:#F6FBF4;--tx:#1B2E1F;--card:#fff;--mut:#4d6652;--line:#dcebd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a12;--tx:#e8f3ea;--card:#172319;--mut:#a9c3ae;--line:#26392a;--g1:#4caf50}}
+:root[data-theme="dark"]{--bg:#0f1a12;--tx:#e8f3ea;--card:#172319;--mut:#a9c3ae;--line:#26392a;--g1:#4caf50}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Inter","Open Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Poppins","Montserrat",system-ui,sans-serif;line-height:1.2;margin:0 0 .5em}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:.6rem 1.25rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.5rem}
+.tools{display:flex;gap:.5rem;justify-self:end}
+.brand{display:flex;align-items:center;gap:.5rem;font:700 1.3rem "Poppins",sans-serif;color:var(--g1)}
+nav{display:flex;gap:.25rem;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav a{padding:.4rem .8rem;border-radius:99px;white-space:nowrap;color:var(--mut)}
+nav a.on,nav a:hover{background:var(--g1);color:#fff}
+button,.btn{font:inherit;cursor:pointer;border:0;border-radius:99px;padding:.6rem 1.2rem;background:var(--g1);color:#fff;font-weight:600}
+button.y,.btn.y{background:var(--y);color:#2b2100}
+button.o{background:transparent;color:var(--tx);border:1px solid var(--line)}
+:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+main{max-width:1080px;margin:auto;padding:1rem}
+.page{display:none}.page.on{display:block}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:2rem 0}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);color:var(--g1)}
+.hero p{color:var(--mut);max-width:46ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem}
+.grid.w{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+.act{text-align:center;transition:transform .2s}.act:hover{transform:translateY(-4px)}
+.ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;margin:0 auto .5rem}
+.stats{display:flex;gap:2rem;flex-wrap:wrap;margin:1.5rem 0}
+.stats b{display:block;font:700 1.8rem "Poppins",sans-serif;color:var(--g1)}
+.tag{display:inline-block;font-size:.8rem;padding:.1rem .6rem;border-radius:99px;background:var(--g3);color:#14401a;margin-right:.3rem}
+.rimgx{height:110px;border-radius:12px;display:grid;place-items:center;font-size:3.4rem;margin-bottom:.6rem}
+input,select,textarea{font:inherit;width:100%;padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--tx);margin:.25rem 0 .7rem}
+label{font-weight:600;font-size:.9rem}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.7rem 0}
+.res{font:600 1.1rem "Poppins",sans-serif;color:var(--g1);min-height:1.5em}
+.glass{font-size:1.6rem;background:none;padding:.2rem;border-radius:8px}
+.rec{background:#c62828}
+.note{font-size:.85rem;color:var(--mut)}
+footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line);margin-top:2rem;font-size:.9rem}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.hero-img,.photo{display:block;width:100%;object-fit:cover;background:var(--g3);color:var(--mut)}
+.hero-img{aspect-ratio:4/3;border-radius:24px}
+.photo{height:170px;border-radius:12px;margin-bottom:.6rem}.photo.wide{height:260px;border-radius:16px}
+.ic{color:var(--g1)}
+.glass svg{color:var(--line)}.glass svg.full{color:#1e88e5}
+
+/* navigation */
+#menu-btn{display:none}
+#top{position:fixed;right:16px;bottom:16px;width:46px;height:46px;padding:0;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .2s}
+#top.show{opacity:1;pointer-events:auto}
+@media(max-width:900px){
+ header{grid-template-columns:1fr auto;grid-template-areas:"b t" "n n";row-gap:.4rem}
+ .brand{grid-area:b}.tools{grid-area:t}nav{grid-area:n}
+}
+
+.ph{position:relative;margin:0 0 .6rem;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,var(--g3),var(--card))}
+.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.page:focus{outline:none}
+details{border-top:1px solid var(--line);padding:.7rem 0}details:first-of-type{border-top:0}summary{cursor:pointer;font-weight:600}details p{margin:.5rem 0 0}
+.tag{font-size:.75rem;font-weight:600;color:var(--g1)}
+#chk label{display:flex;align-items:center;gap:.6rem;font-weight:400;padding:.35rem 0}#chk input{width:auto;margin:0}
+.lead{max-width:60ch;color:var(--mut)}
+.topbar{background:var(--g1);color:#fff;font-size:.85rem;display:flex;justify-content:space-between;gap:1rem;padding:.4rem 1.25rem}.topbar a{color:#fff;font-weight:600}
+.sec{margin-top:3.5rem}.sec>h2,h2.sec{text-align:center}.sec>.lead{text-align:center;margin:0 auto 1.5rem}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.tick{display:flex;gap:.6rem;align-items:flex-start;margin:.5rem 0}.tick svg{flex:none;color:var(--g1);margin-top:.2rem}
+.svc{display:block;transition:transform .15s,border-color .15s}.svc:hover{transform:translateY(-3px);border-color:var(--g1)}.svc svg{width:1.7rem;height:1.7rem;color:var(--g1)}
+.step b{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--g1);color:#fff;margin-bottom:.5rem}
+.cta{background:var(--g1);color:#fff;border-radius:20px;padding:2.2rem 1.2rem;text-align:center}.cta h2{color:#fff}.cta p{margin:0 auto;max-width:48ch}
+footer{text-align:left;background:var(--card)}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:2rem;max-width:1080px;margin:0 auto 1.5rem}.fgrid a,.fgrid span{display:block;margin:.3rem 0}.fgrid b{color:var(--tx)}.fgrid p{margin:.4rem 0 0}
+@media(max-width:700px){.split,.fgrid{grid-template-columns:1fr}.topbar .hide{display:none}}
+.ph>svg{width:44px;height:44px;opacity:.4;color:var(--g1)}
+.ic svg{width:1.8rem;height:1.8rem}button svg,.btn svg{width:1.05em;height:1.05em;vertical-align:-.15em}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="#home" aria-label="GreenPlate home">
+<svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#2E7D32"/><circle cx="32" cy="32" r="21" fill="#F6FBF4"/><circle cx="32" cy="32" r="15" fill="none" stroke="#A5D6A7" stroke-width="2"/><path d="M20 40C20 24 32 16 46 16c0 14-8 26-24 26z" fill="#66BB6A"/><path d="M22 40C28 32 34 26 42 20" stroke="#14401a" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M14 46h10M19 46v6" stroke="#F9A825" stroke-width="3" stroke-linecap="round"/></svg>
+GreenPlate</a>
+<nav id="nav" aria-label="Main">
+<a href="#home">Home</a><a href="#about">About</a><a href="#nutrition">Nutrition</a><a href="#recipes">Recipes</a><a href="#tools">Health Tools</a><a href="#plans">Diet Plans</a><a href="#expert">Ask an Expert</a>
+</nav>
+<div class="tools"><button class="o" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><i data-lucide="menu"></i></button>
+<button class="o" id="theme" aria-label="Toggle dark mode"><i data-lucide="contrast"></i></button></div>
+</header>
+<main>
+
+<section class="page" id="home">
+<div class="hero">
+<div>
+<h1>Eat fresh. Live well.</h1>
+<p>Simple recipes, honest nutrition facts and daily health tools, all in one place. Start with what’s on your plate.</p>
+<div class="row"><a class="btn" href="#recipes">Browse recipes</a><a class="btn y" href="#tools">Check my BMI</a></div>
+<div class="stats"><div><b data-n="10000">0</b>healthy recipes</div><div><b data-n="250">0</b>expert nutritionists</div><div><b data-n="48">0</b>wellness programs</div></div>
+</div>
+<figure class="hero-img ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E8F5E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C8E6C9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22210%22 cy=%22266.25%22 rx=%22112.5%22 ry=%2210%22 fill=%22%230002%22 transform=%22rotate(0 210 266.25)%22/%3E%3Cpath d=%22M85 150 a125 106.25 0 0 0 250 0z%22 fill=%22%232E7D32%22/%3E%3Cellipse cx=%22210%22 cy=%22150%22 rx=%22125%22 ry=%2235.0%22 fill=%22%23f6fbf4%22 transform=%22rotate(0 210 150)%22/%3E%3Cellipse cx=%22210%22 cy=%22152%22 rx=%22115.0%22 ry=%2228.75%22 fill=%22%23E9DDB0%22 transform=%22rotate(0 210 152)%22/%3E%3Ccircle cx=%22160%22 cy=%22126%22 r=%2213%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22160%22 cy=%22126%22 r=%225.8500000000000005%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22210%22 cy=%22120%22 r=%2213%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22210%22 cy=%22120%22 r=%225.8500000000000005%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22255%22 cy=%22128%22 r=%2213%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22255%22 cy=%22128%22 r=%225.8500000000000005%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22185%22 cy=%22136%22 r=%2211%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22181.7%22 cy=%22132.7%22 r=%222.75%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22240%22 cy=%22138%22 r=%2211%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22236.7%22 cy=%22134.7%22 r=%222.75%22 fill=%22%23ffffff66%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2366BB6A%22 transform=%22translate(140 132) rotate(-30) scale(0.8)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2366BB6A%22 transform=%22translate(285 134) rotate(200) scale(0.7)%22/%3E%3Ccircle cx=%22200%22 cy=%22134%22 r=%228%22 fill=%22%23FB8C00%22/%3E%3Ccircle cx=%2252%22 cy=%22230%22 r=%2216%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%2247.2%22 cy=%22225.2%22 r=%224.0%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%2280%22 cy=%22240%22 r=%2214%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%2275.8%22 cy=%22235.8%22 r=%223.5%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%2240%22 cy=%22250%22 r=%2213%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%2236.1%22 cy=%22246.1%22 r=%223.25%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22350%22 cy=%22225%22 r=%2218%22 fill=%22%23FDD835%22 stroke=%22%23F9A825%22 stroke-width=%223%22/%3E%3Ccircle cx=%22350%22 cy=%22225%22 r=%227%22 fill=%22%23FFF59D%22/%3E%3Cpath d=%22M320 120H372L366 228H326Z%22 fill=%22%23E3F2FD%22 opacity=%22.9%22 stroke=%22%23fff%22 stroke-width=%223%22/%3E%3Cpath d=%22M324 160H369L366 228H326Z%22 fill=%22%2381D4FA%22 opacity=%22.8%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2343A047%22 transform=%22translate(40 150) rotate(-40) scale(1.1)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2366BB6A%22 transform=%22translate(30 175) rotate(-10) scale(0.9)%22/%3E%3C/svg%3E" alt="Fresh vegetables and healthy dishes on a table" loading="lazy" onerror="this.remove()"></figure>
+</div>
+<div class="sec split">
+<div><h2>About GreenPlate</h2><p class="lead" style="margin-bottom:1rem">GreenPlate helps people eat better with practical, science-based guidance. Our mission is to make healthy food simple, affordable and enjoyable.</p>
+<div class="tick"><i data-lucide="check"></i><span><b>Science-based.</b> Clear facts, not food fads.</span></div>
+<div class="tick"><i data-lucide="check"></i><span><b>Simple.</b> Tools and recipes that fit a busy day.</span></div>
+<div class="tick"><i data-lucide="check"></i><span><b>Affordable.</b> Everyday ingredients and free tools.</span></div>
+<div class="row"><a class="btn" href="#about">Learn more about us</a></div></div>
+<figure class="photo wide ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E8F5E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C8E6C9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Crect x=%22120%22 y=%2270%22 width=%22170%22 height=%22150%22 rx=%2212%22 fill=%22%23fff%22/%3E%3Crect x=%22140%22 y=%2295%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Crect x=%22140%22 y=%22119%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Crect x=%22140%22 y=%22143%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Crect x=%22140%22 y=%22167%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Cpath d=%22M140 195l24 -20l22 12l24 -30l22 18l30 -10%22 fill=%22none%22 stroke=%22%23E53935%22 stroke-width=%224%22 stroke-linejoin=%22round%22/%3E%3Ccircle cx=%22290%22 cy=%22215%22 r=%2238%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22310%22 cy=%22208%22 r=%2234%22 fill=%22%23E53935%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%232E7D32%22 transform=%22translate(298 172) rotate(-50) scale(0.6)%22/%3E%3Crect x=%22250%22 y=%2260%22 width=%2210%22 height=%22110%22 rx=%223%22 fill=%22%23FBC02D%22/%3E%3C/svg%3E" alt="Nutritionist advising a client" loading="lazy" onerror="this.remove()"></figure>
+</div>
+<div class="sec"><h2>What we offer</h2><p class="lead">Everything you need to eat well and feel your best, in one place.</p>
+<div class="grid w">
+<a class="card svc" href="#nutrition"><i data-lucide="apple"></i><h3>Nutrition facts</h3><p>Search calories and nutrients for everyday foods.</p></a>
+<a class="card svc" href="#recipes"><i data-lucide="chef-hat"></i><h3>Healthy recipes</h3><p>Quick, tasty meals you can filter by diet.</p></a>
+<a class="card svc" href="#tools"><i data-lucide="scale"></i><h3>Health tools</h3><p>BMI and calorie calculators plus a water tracker.</p></a>
+<a class="card svc" href="#plans"><i data-lucide="calendar-days"></i><h3>Diet plans</h3><p>Plans for weight loss, muscle gain and balance.</p></a>
+<a class="card svc" href="#wellness"><i data-lucide="heart-pulse"></i><h3>Wellness</h3><p>Sleep, calm and movement habits with a daily checklist.</p></a>
+<a class="card svc" href="#blog"><i data-lucide="book-open"></i><h3>Blog</h3><p>Short, practical reads on eating well.</p></a>
+</div></div>
+<div class="sec"><h2>How it works</h2>
+<div class="grid w">
+<div class="card step"><b>1</b><h3>Know your numbers</h3><p>Use the BMI and calorie calculators for a quick starting point.</p></div>
+<div class="card step"><b>2</b><h3>Pick a plan</h3><p>Choose a diet plan and recipes that suit your goal.</p></div>
+<div class="card step"><b>3</b><h3>Build daily habits</h3><p>Track water and tick off your wellness checklist.</p></div>
+</div></div>
+<h2 class="sec">Activities for every day</h2>
+<div class="grid" id="acts"></div>
+<h2 class="sec">Success stories</h2>
+<div class="grid w">
+<div class="card">“The weekly planner cut my grocery bill and my stress.”<p class="note">Ayesha, Faisalabad</p></div>
+<div class="card">“I finally understand macros. The calculators are clear and quick.”<p class="note">Bilal, Lahore</p></div>
+<div class="card">“Voice notes let me ask the nutritionist while cooking.”<p class="note">Sana, Karachi</p></div>
+</div>
+<div class="cta sec"><h2>Ready to start eating better?</h2><p>Check your BMI and choose a plan in just a few minutes.</p><div class="row" style="justify-content:center"><a class="btn y" href="#tools">Check my BMI</a><a class="btn" style="background:#fff;color:var(--g1)" href="#plans">See diet plans</a></div></div>
+<div class="card" style="margin-top:2rem"><h3>Get weekly healthy tips</h3><div class="row"><input id="mail" type="email" placeholder="you@example.com" aria-label="Email" style="flex:1;margin:0"><button id="sub">Subscribe</button></div><div class="note" id="subm"></div></div>
+</section>
+
+<section class="page" id="nutrition">
+<h2>Nutrition guide</h2>
+<div class="grid w" id="nut"></div>
+<h3 style="margin-top:1.5rem">Search foods</h3>
+<div class="row"><input id="fq" placeholder="Try: banana, lentils, almonds…" aria-label="Search foods" style="flex:1;margin:0"><button class="y" id="fmic" aria-label="Voice search"><i data-lucide="mic"></i></button></div>
+<div class="grid w" id="fres"></div>
+</section>
+
+<section class="page" id="recipes">
+<h2>Recipes</h2>
+<div class="row" id="filters"></div>
+<div class="grid w" id="rlist"></div>
+</section>
+
+<section class="page" id="tools">
+<h2>Health tools</h2>
+<div class="grid w">
+<div class="card"><h3>BMI calculator</h3><label>Weight (kg)<input id="bw" type="number" min="20" max="300"></label><label>Height (cm)<input id="bh" type="number" min="100" max="250"></label><button id="bgo">Calculate</button><div class="res" id="bres"></div></div>
+<div class="card"><h3>Daily calories</h3><label>Age<input id="ca" type="number"></label><label>Sex<select id="cs"><option value="m">Male</option><option value="f">Female</option></select></label><label>Weight (kg)<input id="cw" type="number"></label><label>Height (cm)<input id="ch" type="number"></label><label>Activity<select id="cl"><option value="1.2">Light</option><option value="1.55">Moderate</option><option value="1.75">Active</option></select></label><button id="cgo">Calculate</button><div class="res" id="cres"></div></div>
+<div class="card"><h3>Water tracker</h3><p class="note">Tap a glass for each 250 ml you drink. Goal: 8 glasses.</p><div id="gl"></div><div class="res" id="wres"></div><button class="o" id="wr">Reset</button></div>
+</div>
+<p class="note">These tools are educational and don’t replace advice from a doctor or registered dietitian.</p>
+</section>
+
+<section class="page" id="plans">
+<h2>Diet plans</h2>
+<div class="grid w">
+<div class="card"><figure class="photo ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E8F5E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C8E6C9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22170%22 cy=%22235.0%22 rx=%2290.0%22 ry=%2210%22 fill=%22%230002%22 transform=%22rotate(0 170 235.0)%22/%3E%3Cpath d=%22M70 140 a100 85.0 0 0 0 200 0z%22 fill=%22%232E7D32%22/%3E%3Cellipse cx=%22170%22 cy=%22140%22 rx=%22100%22 ry=%2228.000000000000004%22 fill=%22%23f6fbf4%22 transform=%22rotate(0 170 140)%22/%3E%3Cellipse cx=%22170%22 cy=%22142%22 rx=%2292.0%22 ry=%2223.0%22 fill=%22%239CCC65%22 transform=%22rotate(0 170 142)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%232E7D32%22 transform=%22translate(150 130) rotate(-20) scale(0.9)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%23388E3C%22 transform=%22translate(230 128) rotate(200) scale(0.9)%22/%3E%3Ccircle cx=%22200%22 cy=%22124%22 r=%2210%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22197.0%22 cy=%22121.0%22 r=%222.5%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22176%22 cy=%22138%22 r=%2210%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22176%22 cy=%22138%22 r=%224.5%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22236%22 cy=%22140%22 r=%2210%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22236%22 cy=%22140%22 r=%224.5%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22262%22 cy=%22130%22 r=%227%22 fill=%22%23FB8C00%22/%3E%3Cpath d=%22M290 80c40 10 50 70 0 100%22 fill=%22none%22 stroke=%22%23FDD835%22 stroke-width=%2216%22/%3E%3Cpath d=%22M290 80c40 10 50 70 0 100%22 fill=%22none%22 stroke=%22%236D4C00%22 stroke-width=%2216%22 stroke-dasharray=%222 9%22 opacity=%22.5%22/%3E%3C/svg%3E" alt="Healthy salad bowl for weight loss" loading="lazy" onerror="this.remove()"></figure><h3>Weight loss</h3><p>Calorie-aware meals built on vegetables, lean protein and fibre.</p></div>
+<div class="card"><figure class="photo ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ECEFF1%22/%3E%3Cstop offset=%221%22 stop-color=%22%23CFD8DC%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Crect x=%2295%22 y=%22125%22 width=%2218%22 height=%2250%22 rx=%224%22 fill=%22%23546E7A%22/%3E%3Crect x=%22110%22 y=%22138%22 width=%2212%22 height=%2224%22 rx=%223%22 fill=%22%2390A4AE%22/%3E%3Crect x=%22122%22 y=%22148%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23B0BEC5%22/%3E%3Crect x=%22232%22 y=%22138%22 width=%2212%22 height=%2224%22 rx=%223%22 fill=%22%2390A4AE%22/%3E%3Crect x=%22243%22 y=%22125%22 width=%2218%22 height=%2250%22 rx=%224%22 fill=%22%23546E7A%22/%3E%3Cellipse cx=%2295%22 cy=%22215%22 rx=%2224%22 ry=%2230%22 fill=%22%23fff%22 transform=%22rotate(0 95 215)%22/%3E%3Cellipse cx=%2295%22 cy=%22223%22 rx=%2210%22 ry=%2210%22 fill=%22%23FBC02D%22 transform=%22rotate(0 95 223)%22/%3E%3Cellipse cx=%22140%22 cy=%22225%22 rx=%2224%22 ry=%2230%22 fill=%22%23fff%22 transform=%22rotate(0 140 225)%22/%3E%3Cellipse cx=%22140%22 cy=%22233%22 rx=%2210%22 ry=%2210%22 fill=%22%23FBC02D%22 transform=%22rotate(0 140 233)%22/%3E%3Cellipse cx=%22300%22 cy=%22170%22 rx=%2230%22 ry=%2238%22 fill=%22%23B5651D%22 transform=%22rotate(20 300 170)%22/%3E%3Crect x=%22318%22 y=%22195%22 width=%2210%22 height=%2245%22 rx=%225%22 fill=%22%23EFEBE9%22/%3E%3Ccircle cx=%22330%22 cy=%22243%22 r=%228%22 fill=%22%23EFEBE9%22/%3E%3Ccircle cx=%22318%22 cy=%22243%22 r=%228%22 fill=%22%23EFEBE9%22/%3E%3C/svg%3E" alt="Lifting weights at the gym" loading="lazy" onerror="this.remove()"></figure><h3>Muscle gain</h3><p>High-protein menus with smart snacks around your workouts.</p></div>
+<div class="card"><figure class="photo ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23F1F8E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23DCEDC8%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22258.0%22 rx=%2295.0%22 ry=%2212%22 fill=%22%230002%22 transform=%22rotate(0 200 258.0)%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%22100%22 fill=%22%23fff%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%2278.0%22 fill=%22%23f1f8e9%22 stroke=%22%23dcedc8%22 stroke-width=%223%22/%3E%3Cpath d=%22M200 160V70A90 90 0 0 1 290 160Z%22 fill=%22%238BC34A%22/%3E%3Cpath d=%22M200 160H290A90 90 0 0 1 200 250Z%22 fill=%22%23FFB74D%22/%3E%3Cpath d=%22M200 160V250A90 90 0 0 1 110 160Z%22 fill=%22%23EF9A9A%22/%3E%3Cpath d=%22M200 160H110A90 90 0 0 1 200 70Z%22 fill=%22%23FFF59D%22/%3E%3Cpath d=%22M200 70V250M110 160H290%22 stroke=%22%23fff%22 stroke-width=%225%22/%3E%3Crect x=%22325%22 y=%2290%22 width=%228%22 height=%22120%22 rx=%224%22 fill=%22%23B0BEC5%22/%3E%3Crect x=%2260%22 y=%2290%22 width=%228%22 height=%22120%22 rx=%224%22 fill=%22%23B0BEC5%22/%3E%3C/svg%3E" alt="Balanced meal on a plate" loading="lazy" onerror="this.remove()"></figure><h3>Balanced living</h3><p>Everyday plates that cover all food groups without counting.</p></div>
+<div class="card"><figure class="photo ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E1F5FE%22/%3E%3Cstop offset=%221%22 stop-color=%22%23B3E5FC%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22258.0%22 rx=%2295.0%22 ry=%2212%22 fill=%22%230002%22 transform=%22rotate(0 200 258.0)%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%22100%22 fill=%22%23fff%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%2278.0%22 fill=%22%23f1f8e9%22 stroke=%22%23dcedc8%22 stroke-width=%223%22/%3E%3Cpath d=%22M200 215C140 175 150 120 185 128C195 131 200 140 200 140C200 140 205 131 215 128C250 120 260 175 200 215Z%22 fill=%22%23E53935%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2343A047%22 transform=%22translate(262 122) rotate(-30) scale(0.8)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2343A047%22 transform=%22translate(120 125) rotate(200) scale(0.7)%22/%3E%3Ccircle cx=%22330%22 cy=%2270%22 r=%2224%22 fill=%22%23fff%22/%3E%3Crect x=%22326%22 y=%2256%22 width=%228%22 height=%2228%22 rx=%222%22 fill=%22%232E7D32%22/%3E%3Crect x=%22316%22 y=%2266%22 width=%2228%22 height=%228%22 rx=%222%22 fill=%22%232E7D32%22/%3E%3C/svg%3E" alt="Doctor talking with a patient" loading="lazy" onerror="this.remove()"></figure><h3>Special needs</h3><p>Diabetic-friendly and low-sodium options. Confirm with your doctor first.</p></div>
+</div>
+</section>
+
+<section class="page" id="about">
+<h2>About GreenPlate</h2>
+<figure class="photo wide ph"><i data-lucide="leaf"></i><img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E8F5E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C8E6C9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Crect x=%22120%22 y=%2270%22 width=%22170%22 height=%22150%22 rx=%2212%22 fill=%22%23fff%22/%3E%3Crect x=%22140%22 y=%2295%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Crect x=%22140%22 y=%22119%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Crect x=%22140%22 y=%22143%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Crect x=%22140%22 y=%22167%22 width=%22110%22 height=%226%22 rx=%223%22 fill=%22%23C8E6C9%22/%3E%3Cpath d=%22M140 195l24 -20l22 12l24 -30l22 18l30 -10%22 fill=%22none%22 stroke=%22%23E53935%22 stroke-width=%224%22 stroke-linejoin=%22round%22/%3E%3Ccircle cx=%22290%22 cy=%22215%22 r=%2238%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22310%22 cy=%22208%22 r=%2234%22 fill=%22%23E53935%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%232E7D32%22 transform=%22translate(298 172) rotate(-50) scale(0.6)%22/%3E%3Crect x=%22250%22 y=%2260%22 width=%2210%22 height=%22110%22 rx=%223%22 fill=%22%23FBC02D%22/%3E%3C/svg%3E" alt="Nutritionist advising a client" loading="lazy" onerror="this.remove()"></figure><div class="card" style="margin-top:1rem"><p>GreenPlate helps people eat better with practical, science-based guidance. Our mission is to make healthy food simple, affordable and enjoyable.</p>
+<h3>Contact</h3><p>hello@greenplate.example</p>
+<h3>Health disclaimer</h3><p class="note">Content on this site is for education only. Talk to a qualified professional before changing your diet.</p></div>
+</section>
+
+<section class="page" id="expert">
+<h2>Ask an expert</h2>
+<div class="card" style="max-width:640px">
+<label>Your name<input id="en"></label>
+<label>Your question<textarea id="eq" rows="3"></textarea></label>
+<div class="row"><button class="y" id="rec"><i data-lucide="mic"></i> Record voice note</button><button class="o" id="stop" hidden><i data-lucide="square"></i> Stop</button></div>
+<div id="vn"></div>
+<button id="send">Send question</button>
+<div class="note" id="em" role="status"></div>
+</div>
+</section>
+
+<section class="page" id="wellness">
+<h2>Wellness</h2>
+<p class="lead">Good health is more than food. Small daily habits around sleep, movement and calm add up.</p>
+<div class="grid w">
+<div class="card"><h3><i data-lucide="moon"></i> Sleep</h3><p>Keep a regular bedtime, dim the lights an hour before bed and keep screens out of the bedroom. Most adults do best with 7 to 9 hours.</p></div>
+<div class="card"><h3><i data-lucide="flower-2"></i> Calm</h3><p>Try five slow breaths when stress rises, or a short stretch or yoga session. Even ten quiet minutes a day helps.</p></div>
+<div class="card"><h3><i data-lucide="footprints"></i> Movement</h3><p>Aim for regular activity you enjoy, such as walking, cycling or swimming, and add strength work a couple of times a week.</p></div>
+<div class="card"><h3><i data-lucide="droplet"></i> Hydration</h3><p>Sip water through the day. Log your glasses with the <a href="#tools"><b>water tracker</b></a> in Health tools.</p></div>
+</div>
+<h3 style="margin-top:1.5rem">Today’s checklist</h3>
+<div class="card" id="chk" style="max-width:520px">
+<label><input type="checkbox" id="c1"> Eat vegetables or fruit with every meal</label>
+<label><input type="checkbox" id="c2"> Drink 8 glasses of water</label>
+<label><input type="checkbox" id="c3"> Move for 30 minutes</label>
+<label><input type="checkbox" id="c4"> Take a few minutes to relax</label>
+<label><input type="checkbox" id="c5"> Go to bed on time</label>
+<p class="note">Your ticks are saved in this browser.</p>
+</div>
+</section>
+
+<section class="page" id="blog">
+<h2>Blog</h2>
+<p class="lead">Short, practical reads on eating well.</p>
+<div class="grid w">
+<div class="card"><span class="tag">Nutrition · 3 min read</span><h3>How to build a balanced plate</h3><details><summary>Read article</summary><p>Fill about half your plate with vegetables and fruit, a quarter with whole grains and a quarter with protein such as beans, fish, eggs or lean meat. Add a little healthy fat, like olive oil or nuts, and drink water with your meal.</p></details></div>
+<div class="card"><span class="tag">Habits · 2 min read</span><h3>Five easy ways to drink more water</h3><details><summary>Read article</summary><p>Keep a bottle where you work, drink a glass when you wake up, add lemon or mint for flavour, pair a glass with every meal, and use the water tracker to see your day at a glance.</p></details></div>
+<div class="card"><span class="tag">Know-how · 3 min read</span><h3>Reading a nutrition label</h3><details><summary>Read article</summary><p>Start with the serving size, since every number refers to it. Then check calories, fibre, sugar and salt. A short ingredient list with foods you recognise is usually a good sign.</p></details></div>
+</div>
+</section>
+
+<section class="page" id="faq">
+<h2>Frequently asked questions</h2>
+<div class="card" style="max-width:720px">
+<details><summary>Can GreenPlate replace my doctor or dietitian?</summary><p>No. GreenPlate shares general education only. Talk to a qualified professional before changing your diet, especially if you have a medical condition.</p></details>
+<details><summary>How accurate is the BMI calculator?</summary><p>BMI is a quick screening number. It does not measure body fat or muscle, so use it as a starting point, not a diagnosis.</p></details>
+<details><summary>Where do the calorie estimates come from?</summary><p>They use a standard equation based on your weight, height, age and activity. Real needs vary from person to person.</p></details>
+<details><summary>Is my information stored?</summary><p>Your tracker ticks and messages are kept only in your own browser on this device.</p></details>
+<details><summary>How can I get in touch?</summary><p>Use the Contact page or email hello@greenplate.example.</p></details>
+</div>
+</section>
+
+<section class="page" id="contact">
+<h2>Contact us</h2>
+<div class="card" style="max-width:560px">
+<label>Your name<input id="cn"></label>
+<label>Email<input id="ce" type="email"></label>
+<label>Message<textarea id="cm" rows="4"></textarea></label>
+<button id="csend">Send message</button>
+<div class="note" id="cmsg" role="status"></div>
+<p class="note">Or email us at hello@greenplate.example</p>
+</div>
+</section>
+
+</main>
+<footer><div class="fgrid"><div><b>GreenPlate</b><p>Eat fresh. Live well. Practical nutrition and wellness guidance for everyday life.</p></div><div><b>Explore</b><a href="#about">About</a><a href="#nutrition">Nutrition</a><a href="#recipes">Recipes</a><a href="#plans">Diet plans</a></div><div><b>Support</b><a href="#expert">Ask an Expert</a><a href="#wellness">Wellness</a><a href="#blog">Blog</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></div><div><b>Contact</b><span>hello@greenplate.example</span></div></div><p class="note" style="text-align:center;margin:0">© 2026 GreenPlate. For education only, not medical advice.</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+<script>
+/* ===== NAVIGATION ===== */
+// GreenPlate navigation: page router, active link, mobile menu, back-to-top.
+(function () {
+  const nav = document.getElementById('nav');
+  const btn = document.getElementById('menu-btn');
+  const pages = [...document.querySelectorAll('.page')];
+  const links = [...document.querySelectorAll('#nav a')];
+
+  // 1. Show the page named in the URL hash (#recipes, #tools ...); unknown hashes fall back to Home
+  function route() {
+    const id = location.hash.slice(1) || 'home';
+    const page = pages.find(p => p.id === id) || pages[0];
+    pages.forEach(p => p.classList.toggle('on', p === page));
+    links.forEach(a => {
+      const active = a.getAttribute('href') === '#' + page.id;
+      a.classList.toggle('on', active);
+      active ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+    });
+    document.title = (page.querySelector('h1, h2')?.textContent || 'Home') + ' | GreenPlate';
+    closeMenu();
+    scrollTo({ top: 0, behavior: 'smooth' });
+    page.setAttribute('tabindex', '-1');       // moves keyboard focus to the new page
+    page.focus({ preventScroll: true });
+  }
+
+  // 2. Mobile hamburger menu
+  function openMenu()  { nav.classList.add('open');    btn?.setAttribute('aria-expanded', 'true'); }
+  function closeMenu() { nav.classList.remove('open'); btn?.setAttribute('aria-expanded', 'false'); }
+  btn?.addEventListener('click', e => { e.stopPropagation(); nav.classList.contains('open') ? closeMenu() : openMenu(); });
+  document.addEventListener('click', e => { if (!nav.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  // 3. Back-to-top button
+  const top = document.createElement('button');
+  top.id = 'top';
+  top.setAttribute('aria-label', 'Back to top');
+  top.innerHTML = '<i data-lucide="arrow-up"></i>';
+  top.onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
+  document.body.appendChild(top);
+  addEventListener('scroll', () => top.classList.toggle('show', scrollY > 400), { passive: true });
+
+  addEventListener('hashchange', route);
+  route();
+})();
+
+/* ===== MAIN FEATURES ===== */
+const $=s=>document.querySelector(s);
+const PIC={"quinoa":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E8F5E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C8E6C9%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22247.75%22 rx=%22103.5%22 ry=%2210%22 fill=%22%230002%22 transform=%22rotate(0 200 247.75)%22/%3E%3Cpath d=%22M85 140 a115 97.75 0 0 0 230 0z%22 fill=%22%232E7D32%22/%3E%3Cellipse cx=%22200%22 cy=%22140%22 rx=%22115%22 ry=%2232.2%22 fill=%22%23f6fbf4%22 transform=%22rotate(0 200 140)%22/%3E%3Cellipse cx=%22200%22 cy=%22142%22 rx=%22105.80000000000001%22 ry=%2226.450000000000003%22 fill=%22%23E9DDB0%22 transform=%22rotate(0 200 142)%22/%3E%3Ccircle cx=%22160%22 cy=%22128%22 r=%2213%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22160%22 cy=%22128%22 r=%225.8500000000000005%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22205%22 cy=%22122%22 r=%2213%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22205%22 cy=%22122%22 r=%225.8500000000000005%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22250%22 cy=%22130%22 r=%2213%22 fill=%22%23C5E1A5%22 stroke=%22%237CB342%22 stroke-width=%223%22/%3E%3Ccircle cx=%22250%22 cy=%22130%22 r=%225.8500000000000005%22 fill=%22%23E8F5E9%22/%3E%3Ccircle cx=%22180%22 cy=%22140%22 r=%2211%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22176.7%22 cy=%22136.7%22 r=%222.75%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22230%22 cy=%22141%22 r=%2211%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22226.7%22 cy=%22137.7%22 r=%222.75%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22270%22 cy=%22120%22 r=%229%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22267.3%22 cy=%22117.3%22 r=%222.25%22 fill=%22%23ffffff66%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2366BB6A%22 transform=%22translate(140 134) rotate(-30) scale(0.8)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2366BB6A%22 transform=%22translate(285 135) rotate(200) scale(0.7)%22/%3E%3Ccircle cx=%22200%22 cy=%22136%22 r=%228%22 fill=%22%23FB8C00%22/%3E%3Ccircle cx=%22150%22 cy=%22146%22 r=%226%22 fill=%22%23FB8C00%22/%3E%3C/svg%3E","smoothie":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23FCE4EC%22/%3E%3Cstop offset=%221%22 stop-color=%22%23F8BBD0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cpath d=%22M130 70H270L248 235Q245 248 232 248H168Q155 248 152 235Z%22 fill=%22%23F8BBD0%22 stroke=%22%23fff%22 stroke-width=%225%22/%3E%3Cpath d=%22M137 105H263L248 235Q245 248 232 248H168Q155 248 152 235Z%22 fill=%22%23D81B60%22 opacity=%22.85%22/%3E%3Crect x=%22222%22 y=%2230%22 width=%229%22 height=%22120%22 rx=%224%22 fill=%22%2343A047%22/%3E%3Ccircle cx=%22160%22 cy=%2272%22 r=%2212%22 fill=%22%236A1B9A%22/%3E%3Ccircle cx=%22185%22 cy=%2266%22 r=%2212%22 fill=%22%23C62828%22/%3E%3Ccircle cx=%22212%22 cy=%2270%22 r=%2212%22 fill=%22%236A1B9A%22/%3E%3Ccircle cx=%22238%22 cy=%2268%22 r=%2211%22 fill=%22%23C62828%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%232E7D32%22 transform=%22translate(190 56) rotate(-20) scale(0.5)%22/%3E%3Ccircle cx=%22315%22 cy=%22225%22 r=%2210%22 fill=%22%236A1B9A%22/%3E%3Ccircle cx=%22338%22 cy=%22232%22 r=%2210%22 fill=%22%23C62828%22/%3E%3Ccircle cx=%2280%22 cy=%22228%22 r=%2210%22 fill=%22%23C62828%22/%3E%3C/svg%3E","chicken":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23FFF3E0%22/%3E%3Cstop offset=%221%22 stop-color=%22%23FFE0B2%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22258.0%22 rx=%2295.0%22 ry=%2212%22 fill=%22%230002%22 transform=%22rotate(0 200 258.0)%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%22100%22 fill=%22%23fff%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%2278.0%22 fill=%22%23f1f8e9%22 stroke=%22%23dcedc8%22 stroke-width=%223%22/%3E%3Cellipse cx=%22160%22 cy=%22150%22 rx=%2242%22 ry=%2224%22 fill=%22%23B5651D%22 transform=%22rotate(-15 160 150)%22/%3E%3Cellipse cx=%22215%22 cy=%22145%22 rx=%2242%22 ry=%2224%22 fill=%22%23C0762B%22 transform=%22rotate(10 215 145)%22/%3E%3Cellipse cx=%22185%22 cy=%22182%22 rx=%2240%22 ry=%2222%22 fill=%22%23A55A19%22 transform=%22rotate(-5 185 182)%22/%3E%3Cpath d=%22M140 150l16 -10%22 stroke=%22%236D3A0E%22 stroke-width=%223%22/%3E%3Cpath d=%22M155 152l16 -10%22 stroke=%22%236D3A0E%22 stroke-width=%223%22/%3E%3Cpath d=%22M205 148l16 -10%22 stroke=%22%236D3A0E%22 stroke-width=%223%22/%3E%3Cpath d=%22M220 150l16 -10%22 stroke=%22%236D3A0E%22 stroke-width=%223%22/%3E%3Ccircle cx=%22262%22 cy=%22150%22 r=%2215%22 fill=%22%232E7D32%22/%3E%3Ccircle cx=%22274%22 cy=%22140%22 r=%2213%22 fill=%22%23388E3C%22/%3E%3Ccircle cx=%22250%22 cy=%22138%22 r=%2212%22 fill=%22%2343A047%22/%3E%3Crect x=%22257%22 y=%22160%22 width=%226%22 height=%2222%22 rx=%223%22 fill=%22%237CB342%22/%3E%3Ccircle cx=%22250%22 cy=%22190%22 r=%228%22 fill=%22%23FB8C00%22/%3E%3Ccircle cx=%22268%22 cy=%22196%22 r=%228%22 fill=%22%23FB8C00%22/%3E%3Ccircle cx=%22120%22 cy=%22190%22 r=%227%22 fill=%22%23E53935%22/%3E%3C/svg%3E","daal":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23FFF8E1%22/%3E%3Cstop offset=%221%22 stop-color=%22%23FFECB3%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22247.75%22 rx=%22103.5%22 ry=%2210%22 fill=%22%230002%22 transform=%22rotate(0 200 247.75)%22/%3E%3Cpath d=%22M85 140 a115 97.75 0 0 0 230 0z%22 fill=%22%23BF6B2A%22/%3E%3Cellipse cx=%22200%22 cy=%22140%22 rx=%22115%22 ry=%2232.2%22 fill=%22%23f6fbf4%22 transform=%22rotate(0 200 140)%22/%3E%3Cellipse cx=%22200%22 cy=%22142%22 rx=%22105.80000000000001%22 ry=%2226.450000000000003%22 fill=%22%23F2B632%22 transform=%22rotate(0 200 142)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%232E7D32%22 transform=%22translate(150 130) rotate(10) scale(0.9)%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%23388E3C%22 transform=%22translate(240 128) rotate(170) scale(0.9)%22/%3E%3Ccircle cx=%22200%22 cy=%22130%22 r=%2210%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22176%22 cy=%22140%22 r=%225%22 fill=%22%23fff8%22/%3E%3Ccircle cx=%22228%22 cy=%22140%22 r=%225%22 fill=%22%23fff8%22/%3E%3Cpath d=%22M290 205l40 -22 a22 22 0 0 1 -40 22z%22 fill=%22%23FDD835%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2343A047%22 transform=%22translate(75 215) rotate(40) scale(0.7)%22/%3E%3C/svg%3E","avocado":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23F1F8E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23DCEDC8%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22258.0%22 rx=%2295.0%22 ry=%2212%22 fill=%22%230002%22 transform=%22rotate(0 200 258.0)%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%22100%22 fill=%22%23fff%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%2278.0%22 fill=%22%23f1f8e9%22 stroke=%22%23dcedc8%22 stroke-width=%223%22/%3E%3Crect x=%22125%22 y=%22115%22 width=%22150%22 height=%2290%22 rx=%2214%22 fill=%22%23D9A35B%22/%3E%3Crect x=%22132%22 y=%22122%22 width=%22136%22 height=%2276%22 rx=%2210%22 fill=%22%23E8BE7E%22/%3E%3Cellipse cx=%22165%22 cy=%22160%22 rx=%2226%22 ry=%2234%22 fill=%22%237CB342%22 transform=%22rotate(-20 165 160)%22/%3E%3Cellipse cx=%22165%22 cy=%22160%22 rx=%2218%22 ry=%2226%22 fill=%22%23AED581%22 transform=%22rotate(-20 165 160)%22/%3E%3Cellipse cx=%22205%22 cy=%22150%22 rx=%2226%22 ry=%2234%22 fill=%22%237CB342%22 transform=%22rotate(-10 205 150)%22/%3E%3Cellipse cx=%22205%22 cy=%22150%22 rx=%2218%22 ry=%2226%22 fill=%22%23AED581%22 transform=%22rotate(-10 205 150)%22/%3E%3Cellipse cx=%22240%22 cy=%22165%22 rx=%2218%22 ry=%2212%22 fill=%22%23fff%22 transform=%22rotate(0 240 165)%22/%3E%3Ccircle cx=%22240%22 cy=%22165%22 r=%228%22 fill=%22%23FBC02D%22/%3E%3Ccircle cx=%22145%22 cy=%22192%22 r=%228%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22142.6%22 cy=%22189.6%22 r=%222.0%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22265%22 cy=%22128%22 r=%228%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22262.6%22 cy=%22125.6%22 r=%222.0%22 fill=%22%23ffffff66%22/%3E%3C/svg%3E","zucchini":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23F1F8E9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C5E1A5%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22247.75%22 rx=%22103.5%22 ry=%2210%22 fill=%22%230002%22 transform=%22rotate(0 200 247.75)%22/%3E%3Cpath d=%22M85 140 a115 97.75 0 0 0 230 0z%22 fill=%22%23558B2F%22/%3E%3Cellipse cx=%22200%22 cy=%22140%22 rx=%22115%22 ry=%2232.2%22 fill=%22%23f6fbf4%22 transform=%22rotate(0 200 140)%22/%3E%3Cellipse cx=%22200%22 cy=%22142%22 rx=%22105.80000000000001%22 ry=%2226.450000000000003%22 fill=%22%237CB342%22 transform=%22rotate(0 200 142)%22/%3E%3Cpath d=%22M140 128q10 -16 20 0t20 0t20 0%22 fill=%22none%22 stroke=%22%23AED581%22 stroke-width=%225%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M160 128q10 -16 20 0t20 0t20 0%22 fill=%22none%22 stroke=%22%23AED581%22 stroke-width=%225%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M180 128q10 -16 20 0t20 0t20 0%22 fill=%22none%22 stroke=%22%23AED581%22 stroke-width=%225%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M150 140q10 -16 20 0t20 0t20 0%22 fill=%22none%22 stroke=%22%23C5E1A5%22 stroke-width=%225%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M175 140q10 -16 20 0t20 0t20 0%22 fill=%22none%22 stroke=%22%23C5E1A5%22 stroke-width=%225%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M195 140q10 -16 20 0t20 0t20 0%22 fill=%22none%22 stroke=%22%23C5E1A5%22 stroke-width=%225%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%22135%22 cy=%22132%22 r=%227%22 fill=%22%23388E3C%22/%3E%3Ccircle cx=%22250%22 cy=%22134%22 r=%227%22 fill=%22%23388E3C%22/%3E%3Ccircle cx=%22225%22 cy=%22126%22 r=%229%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22222.3%22 cy=%22123.3%22 r=%222.25%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22160%22 cy=%22146%22 r=%229%22 fill=%22%23E53935%22/%3E%3Ccircle cx=%22157.3%22 cy=%22143.3%22 r=%222.25%22 fill=%22%23ffffff66%22/%3E%3Ccircle cx=%22210%22 cy=%22142%22 r=%224%22 fill=%22%23FFF9C4%22/%3E%3C/svg%3E","salmon":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E3F2FD%22/%3E%3Cstop offset=%221%22 stop-color=%22%23BBDEFB%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22258.0%22 rx=%2295.0%22 ry=%2212%22 fill=%22%230002%22 transform=%22rotate(0 200 258.0)%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%22100%22 fill=%22%23fff%22/%3E%3Ccircle cx=%22200%22 cy=%22160%22 r=%2278.0%22 fill=%22%23f1f8e9%22 stroke=%22%23dcedc8%22 stroke-width=%223%22/%3E%3Cellipse cx=%22200%22 cy=%22160%22 rx=%2270%22 ry=%2232%22 fill=%22%23F4845F%22 transform=%22rotate(-8 200 160)%22/%3E%3Cpath d=%22M150 162q14 -18 28 0%22 fill=%22none%22 stroke=%22%23FFB199%22 stroke-width=%224%22/%3E%3Cpath d=%22M180 160q14 -18 28 0%22 fill=%22none%22 stroke=%22%23FFB199%22 stroke-width=%224%22/%3E%3Cpath d=%22M210 155q14 -18 28 0%22 fill=%22none%22 stroke=%22%23FFB199%22 stroke-width=%224%22/%3E%3Cpath d=%22M235 148q14 -18 28 0%22 fill=%22none%22 stroke=%22%23FFB199%22 stroke-width=%224%22/%3E%3Ccircle cx=%22270%22 cy=%22200%22 r=%2218%22 fill=%22%23FDD835%22 stroke=%22%23F9A825%22 stroke-width=%223%22/%3E%3Ccircle cx=%22270%22 cy=%22200%22 r=%226%22 fill=%22%23FFF59D%22/%3E%3Cpath d=%22M120 110l30 70%22 stroke=%22%232E7D32%22 stroke-width=%226%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M134 110l30 70%22 stroke=%22%232E7D32%22 stroke-width=%226%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M148 110l30 70%22 stroke=%22%232E7D32%22 stroke-width=%226%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M0 0C10-22 34-22 46 0C34 22 10 22 0 0Z%22 fill=%22%2366BB6A%22 transform=%22translate(255 125) rotate(-20) scale(0.8)%22/%3E%3C/svg%3E","porridge":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23FFF3E0%22/%3E%3Cstop offset=%221%22 stop-color=%22%23FFE0B2%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22300%22 fill=%22url(%23g)%22/%3E%3Crect y=%22235%22 width=%22400%22 height=%2265%22 fill=%22%23c9a77c%22 opacity=%22.55%22/%3E%3Cellipse cx=%22200%22 cy=%22247.75%22 rx=%22103.5%22 ry=%2210%22 fill=%22%230002%22 transform=%22rotate(0 200 247.75)%22/%3E%3Cpath d=%22M85 140 a115 97.75 0 0 0 230 0z%22 fill=%22%238D6E63%22/%3E%3Cellipse cx=%22200%22 cy=%22140%22 rx=%22115%22 ry=%2232.2%22 fill=%22%23f6fbf4%22 transform=%22rotate(0 200 140)%22/%3E%3Cellipse cx=%22200%22 cy=%22142%22 rx=%22105.80000000000001%22 ry=%2226.450000000000003%22 fill=%22%23EFE3C8%22 transform=%22rotate(0 200 142)%22/%3E%3Cellipse cx=%22165%22 cy=%22132%22 rx=%2218%22 ry=%227%22 fill=%22%23EF5350%22 transform=%22rotate(-15 165 132)%22/%3E%3Cellipse cx=%22165%22 cy=%22133%22 rx=%2213%22 ry=%223%22 fill=%22%23FFCDD2%22 transform=%22rotate(-15 165 133)%22/%3E%3Cellipse cx=%22195%22 cy=%22126%22 rx=%2218%22 ry=%227%22 fill=%22%23EF5350%22 transform=%22rotate(5 195 126)%22/%3E%3Cellipse cx=%22195%22 cy=%22127%22 rx=%2213%22 ry=%223%22 fill=%22%23FFCDD2%22 transform=%22rotate(5 195 127)%22/%3E%3Cellipse cx=%22225%22 cy=%22132%22 rx=%2218%22 ry=%227%22 fill=%22%23EF5350%22 transform=%22rotate(15 225 132)%22/%3E%3Cellipse cx=%22225%22 cy=%22133%22 rx=%2213%22 ry=%223%22 fill=%22%23FFCDD2%22 transform=%22rotate(15 225 133)%22/%3E%3Cellipse cx=%22250%22 cy=%22138%22 rx=%2218%22 ry=%227%22 fill=%22%23EF5350%22 transform=%22rotate(25 250 138)%22/%3E%3Cellipse cx=%22250%22 cy=%22139%22 rx=%2213%22 ry=%223%22 fill=%22%23FFCDD2%22 transform=%22rotate(25 250 139)%22/%3E%3Ccircle cx=%22200%22 cy=%22140%22 r=%223%22 fill=%22%238D6E63%22/%3E%3Ccircle cx=%22215%22 cy=%22142%22 r=%223%22 fill=%22%238D6E63%22/%3E%3Ccircle cx=%22180%22 cy=%22142%22 r=%223%22 fill=%22%238D6E63%22/%3E%3Cpath d=%22M300 190l20 -50%22 stroke=%22%23B0BEC5%22 stroke-width=%227%22 stroke-linecap=%22round%22/%3E%3Cellipse cx=%22296%22 cy=%22205%22 rx=%2212%22 ry=%2218%22 fill=%22%23B0BEC5%22 transform=%22rotate(20 296 205)%22/%3E%3C/svg%3E"};
+const post=()=>Promise.reject();
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+/* theme */
+$("#theme").onclick=()=>{const r=document.documentElement;const d=getComputedStyle(r).getPropertyValue("--bg").trim()==="#0f1a12";r.dataset.theme=d?"light":"dark"};
+/* activities */
+const acts=[["carrot","Healthy eating","#e8f5e9"],["calendar-days","Meal planning","#fff8e1"],["flame","Calorie tracking","#ffebee"],["droplet","Water intake","#e3f2fd"],["flower-2","Yoga","#f3e5f5"],["footprints","Walking","#e0f2f1"],["activity","Running","#fff3e0"],["dumbbell","Gym workout","#eceff1"],["bike","Cycling","#e8eaf6"],["moon","Sleep","#ede7f6"],["pill","Vitamins","#fffde7"],["chef-hat","Cooking","#fbe9e7"],["shopping-cart","Grocery list","#f1f8e9"],["apple","Fruits & veg","#fce4ec"],["scale","Weight goals","#e0f7fa"],["stethoscope","Doctor chat","#e1f5fe"]];
+$("#acts").innerHTML=acts.map(a=>`<a class="card act" href="#tools"><div class="ic" style="background:${a[2]}"><i data-lucide="${a[0]}"></i></div><b>${a[1]}</b></a>`).join("");
+/* counters */
+document.querySelectorAll("[data-n]").forEach(el=>{const t=+el.dataset.n;let c=0;const s=Math.ceil(t/60);const i=setInterval(()=>{c=Math.min(t,c+s);el.textContent=c.toLocaleString()+"+";if(c>=t)clearInterval(i)},25)});
+/* nutrition */
+const nut=[["wheat","Carbohydrates","Your main energy source. Choose whole grains, fruit and legumes."],["drumstick","Protein","Builds and repairs muscle. Eggs, pulses, fish, dairy and nuts."],["droplets","Healthy fats","Support the brain and heart. Olive oil, nuts, seeds, avocado."],["citrus","Vitamins","Small amounts, big roles. Eat a rainbow of fruit and vegetables."],["gem","Minerals","Iron, calcium, potassium and more. Keep salt in check."],["leaf","Fibre","Keeps digestion steady and you full for longer."]];
+$("#nut").innerHTML=nut.map(n=>`<div class="card"><div class="ic" style="background:var(--g3)"><i data-lucide="${n[0]}"></i></div><h3>${n[1]}</h3><p>${n[2]}</p></div>`).join("");
+const foods=[["Banana",89,"1.1 g protein, rich in potassium"],["Lentils (cooked)",116,"9 g protein, 8 g fibre"],["Almonds",579,"21 g protein, healthy fats"],["Spinach",23,"Iron, folate, vitamin K"],["Apple",52,"2.4 g fibre, vitamin C"],["Brown rice (cooked)",112,"Whole grain carbohydrate"],["Egg",143,"13 g protein, vitamin B12"],["Yogurt (plain)",61,"Calcium and probiotics"],["Chickpeas (cooked)",164,"9 g protein, 8 g fibre"],["Carrot",41,"Beta-carotene for vision"]];
+async function showFoods(){const q=$("#fq").value.toLowerCase();let r;
+{r=foods.filter(f=>f[0].toLowerCase().includes(q)).map(f=>({name:f[0],kcal:f[1],note:f[2]}))}
+$("#fres").innerHTML=r.length?r.map(f=>`<div class="card"><b>${f.name}</b><div class="note">${f.kcal} kcal per 100 g<br>${f.note}</div></div>`).join(""):`<p class="note">No match. Try another food name.</p>`}
+$("#fq").oninput=showFoods;showFoods();
+$("#fmic").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert("Voice search isn’t supported in this browser. Type your search instead.");return}const r=new SR();r.onresult=e=>{$("#fq").value=e.results[0][0].transcript.replace(/\.$/,"");showFoods()};r.onerror=()=>alert("Microphone access was blocked. Allow it in your browser settings.");r.start()};
+/* recipes */
+const recipes=[["Mint cucumber quinoa bowl","quinoa","vegan",380,15],["Smoothie bowl with berries","smoothie","vegan",290,10],["Grilled chicken and veg tray","chicken","high-protein",450,35],["Lentil and spinach daal","daal","vegan",340,30],["Avocado egg toast","avocado","keto",320,10],["Zucchini noodles with pesto","zucchini","keto",300,20],["Baked salmon with greens","salmon","high-protein",420,25],["Oat and apple porridge","porridge","diabetic-friendly",260,12]];
+let flt="all",fav=store.get("fav",[]);
+const dets=["all","vegan","keto","high-protein","diabetic-friendly","saved"];
+function showR(){$("#filters").innerHTML=dets.map(d=>`<button class="${d===flt?"":"o"}" data-f="${d}">${d==="all"?"All":d==="saved"?"Saved ♥":d}</button>`).join("");
+const l=recipes.filter(r=>flt==="all"||(flt==="saved"?fav.includes(r[0]):r[2]===flt));
+$("#rlist").innerHTML=l.length?l.map(r=>`<div class="card"><figure class="photo ph"><i data-lucide="leaf"></i><img src="${PIC[r[1]]}" alt="${r[0]}" loading="lazy" onerror="this.remove()"></figure><h3>${r[0]}</h3><span class="tag">${r[2]}</span><span class="tag">${r[3]} kcal</span><span class="tag">${r[4]} min</span><div class="row"><button class="o" data-s="${r[0]}">${fav.includes(r[0])?"♥ Saved":"♡ Save"}</button><button class="o" data-l="${r[0]}"><i data-lucide="volume-2"></i> Listen</button></div></div>`).join(""):`<p class="note">Nothing saved yet. Tap Save on any recipe.</p>`;
+document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{flt=b.dataset.f;showR()});
+document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{const n=b.dataset.s;fav=fav.includes(n)?fav.filter(x=>x!==n):[...fav,n];store.set("fav",fav);showR()});
+document.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{const r=recipes.find(x=>x[0]===b.dataset.l);if(!window.speechSynthesis)return;speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(`${r[0]}. ${r[3]} calories, ready in ${r[4]} minutes.`))})}
+showR();
+/* tools */
+$("#bgo").onclick=()=>{const w=+$("#bw").value,h=+$("#bh").value/100;if(!w||!h){$("#bres").textContent="Enter your weight and height.";return}const b=w/(h*h);const c=b<18.5?"Underweight":b<25?"Healthy range":b<30?"Overweight":"Obese";$("#bres").textContent=`BMI ${b.toFixed(1)} · ${c}`;post("/api/bmi",{weight:w,height:h*100,bmi:+b.toFixed(1),category:c}).catch(()=>{})};
+$("#cgo").onclick=()=>{const a=+$("#ca").value,w=+$("#cw").value,h=+$("#ch").value;if(!a||!w||!h){$("#cres").textContent="Fill in every field.";return}const bmr=10*w+6.25*h-5*a+($("#cs").value==="m"?5:-161);const t=Math.round(bmr*$("#cl").value);$("#cres").innerHTML=`${t} kcal/day<br><span class="note">Protein ≈ ${Math.round(w*1.6)} g · Fat ≈ ${Math.round(t*.28/9)} g · Carbs ≈ ${Math.round(t*.5/4)} g</span>`};
+let water=store.get("water",0);
+function showW(){$("#gl").innerHTML=Array.from({length:8},(_,i)=>`<button class="glass" aria-label="Glass ${i+1}" data-g="${i+1}"><i data-lucide="droplet" class="${i<water?"full":""}"></i></button>`).join("");$("#wres").textContent=`${water*250} ml of 2000 ml`;document.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{water=+b.dataset.g;store.set("water",water);showW()})}
+$("#wr").onclick=()=>{water=0;store.set("water",0);showW()};showW();
+/* newsletter */
+$("#sub").onclick=async()=>{const e=$("#mail").value;if(!/^\S+@\S+\.\S+$/.test(e)){$("#subm").textContent="Enter a valid email address.";return}
+try{await post("/api/newsletter",{email:e});$("#subm").textContent="You’re subscribed. Check your inbox for a welcome email."}catch(x){store.set("subs",[...store.get("subs",[]),e]);$("#subm").textContent="You’re subscribed (saved on this device)."}};
+
+/* voice notes */
+let mr,chunks=[],notes=[],blobs=[];
+function showN(){$("#vn").innerHTML=notes.map((u,i)=>`<div class="row"><audio controls src="${u}"></audio><button class="o" data-d="${i}">Delete</button></div>`).join("");document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{notes.splice(+b.dataset.d,1);blobs.splice(+b.dataset.d,1);showN()})}
+$("#rec").onclick=async()=>{try{const s=await navigator.mediaDevices.getUserMedia({audio:true});mr=new MediaRecorder(s);chunks=[];mr.ondataavailable=e=>chunks.push(e.data);mr.onstop=()=>{const bl=new Blob(chunks,{type:mr.mimeType});blobs.push(bl);notes.push(URL.createObjectURL(bl));s.getTracks().forEach(t=>t.stop());showN();$("#rec").hidden=false;$("#stop").hidden=true};mr.start();$("#rec").hidden=true;$("#stop").hidden=false}catch(e){$("#em").textContent="Microphone unavailable. Allow access in your browser, or type your question."}};
+$("#stop").onclick=()=>mr&&mr.state!=="inactive"&&mr.stop();
+$("#send").onclick=()=>{if(!$("#en").value.trim()||(!$("#eq").value.trim()&&!notes.length)){$("#em").textContent="Add your name and a question or voice note.";return}store.set("questions",[...store.get("questions",[]),{name:$("#en").value,q:$("#eq").value,voiceNotes:notes.length}]);$("#em").textContent="Thank you. Your question was saved on this device. To reach a nutritionist, email hello@greenplate.example.";$("#eq").value="";notes=[];blobs=[];showN()};
+/* checklist */
+const ck=store.get("check",{});document.querySelectorAll("#chk input").forEach(i=>{i.checked=!!ck[i.id];i.onchange=()=>{ck[i.id]=i.checked;store.set("check",ck)}});
+/* contact */
+$("#csend").onclick=()=>{const n=$("#cn").value.trim(),e=$("#ce").value.trim(),m=$("#cm").value.trim();if(!n||!/^\S+@\S+\.\S+$/.test(e)||!m){$("#cmsg").textContent="Please enter your name, a valid email and a message.";return}store.set("messages",[...store.get("messages",[]),{n,e,m}]);$("#cmsg").textContent="Thank you, "+n+". Your message was saved on this device. To reach the team, email hello@greenplate.example.";["#cn","#ce","#cm"].forEach(s=>$(s).value="")};
+/* icons */
+const ico=()=>{if(window.lucide&&document.querySelector("i[data-lucide]"))lucide.createIcons()};
+new MutationObserver(ico).observe(document.body,{childList:true,subtree:true});ico();
+</script>
+</body>
+</html>

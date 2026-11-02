@@ -1,0 +1,11 @@
+id,type,created,updated,name,email,message,weight_kg,height_cm,bmi,category,glasses,kcal_per_100g,note,voice_files
+1,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Banana,,,,,,,,89,"1.1 g protein, rich in potassium",
+2,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Lentils (cooked),,,,,,,,116,"9 g protein, 8 g fibre",
+3,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Almonds,,,,,,,,579,"21 g protein, healthy fats",
+4,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Spinach,,,,,,,,23,"Iron, folate, vitamin K",
+5,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Apple,,,,,,,,52,"2.4 g fibre, vitamin C",
+6,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Brown rice (cooked),,,,,,,,112,Whole grain carbohydrate,
+7,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Egg,,,,,,,,143,"13 g protein, vitamin B12",
+8,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Yogurt (plain),,,,,,,,61,Calcium and probiotics,
+9,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Chickpeas (cooked),,,,,,,,164,"9 g protein, 8 g fibre",
+10,food,2026-10-31T07:52:02,2026-10-31T07:52:02,Carrot,,,,,,,,41,Beta-carotene for vision,
